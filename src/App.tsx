@@ -1,7 +1,9 @@
+import { Button } from "./components/ui/button";
+
 function App() {
   return (
     <>
-      <p className="text-4xl">Hello World</p>
+      <Button className="bg-orange-500">Go Beavs</Button>
     </>
   );
 }
