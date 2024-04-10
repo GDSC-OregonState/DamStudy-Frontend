@@ -1,12 +1,21 @@
-import path from "path";
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vite";
+import path from "path";
+import { defineConfig, loadEnv } from "vite";
 
-export default defineConfig({
-  plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+export default defineConfig(({ mode }) => {
+  const { GOOGLE_MAPS_API_KEY = "" } = loadEnv(mode, process.cwd(), "");
+  return {
+    plugins: [react()],
+    define: {
+      "process.env.GOOGLE_MAPS_API_KEY": JSON.stringify(GOOGLE_MAPS_API_KEY),
     },
-  },
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    },
+    server: {
+      port: 5173,
+    },
+  };
 });

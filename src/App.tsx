@@ -1,11 +1,27 @@
 import ErrorGraphic from "@/components/error-graphic";
-import { Route, Routes } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import { AboutPage } from "./components/about";
+import { ExplorePage } from "./components/explore";
+import Hero from "./components/hero";
 import { ModeToggle } from "./components/mode-toggle";
+import { Button } from "./components/ui/button";
 
 const children = (
   <Routes>
+    {/* Landing/Index */}
     <Route path="/" element={<Home />} />
+    {/* About */}
     <Route path="/about" element={<About />} />
+    {/* Main */}
+    <Route path="/explore" element={<Explore />} />
+    <Route path="/study-room/:id" element={<Explore />} />
     {/* 404 */}
     <Route
       path="*"
@@ -43,13 +59,18 @@ function ErrorFallback({ error }: { error: Error }) {
   );
 }
 
+function Explore() {
+  return (
+    <div className="w-full h-screen">
+      <ExplorePage />
+    </div>
+  );
+}
+
 function Home() {
   return (
     <>
-      <div className=" p-4 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold">Home</h1>
-        <a href="/about">About</a>
-      </div>
+      <Hero />
     </>
   );
 }
@@ -57,24 +78,73 @@ function Home() {
 function About() {
   return (
     <>
-      <div className=" p-4 rounded-lg shadow-lg">
-        <h1 className="text-2xl font-bold">About</h1>
-        <a href="/">Home</a>
-      </div>
+      <AboutPage />
     </>
   );
 }
 
 function App() {
+  const navigate = useNavigate();
   return (
     <>
-      <header className="p-4 shadow-md flex justify-between items-center">
+      <header className="p-4 flex justify-around md:-space-x-96 items-center">
         <h1 className="text-2xl font-bold">DamStudy</h1>
-        <ModeToggle />
+        <nav className="hidden md:block">
+          <ul className="flex space-x-4 self-center">
+            <Button variant="link" onClick={() => navigate("/")}>
+              Home
+            </Button>
+            <Button variant="link" onClick={() => navigate("/about")}>
+              About
+            </Button>
+            <Button variant="link" onClick={() => navigate("/explore")}>
+              Explore
+            </Button>
+            <ModeToggle />
+          </ul>
+        </nav>
+
+        <nav className="md:hidden flex space-x-12">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <HamburgerMenuIcon className="text-orange-600" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <Button variant="link" onClick={() => navigate("/")}>
+                  Home
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button variant="link" onClick={() => navigate("/about")}>
+                  About
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button variant="link" onClick={() => navigate("/explore")}>
+                  Explore
+                </Button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <ModeToggle />
+        </nav>
       </header>
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-[90dvh]">
         {children}
       </div>
+      <footer id="footer" className="mt-12 p-4 text-center text-sm">
+        <p>
+          DamStudy is being developed by the{" "}
+          <a
+            href="https://gdsc.community.dev/oregon-state-university/"
+            className="text-orange-600 dark:text-orange-600 hover:underline"
+          >
+            Google Developer Student Club
+          </a>{" "}
+          at Oregon State University
+        </p>
+      </footer>
     </>
   );
 }
