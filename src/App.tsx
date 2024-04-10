@@ -8,6 +8,7 @@ import {
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { AboutPage } from "./components/about";
+import AddRoom from "./components/add-room";
 import { ExplorePage } from "./components/explore";
 import Hero from "./components/hero";
 import { ModeToggle } from "./components/mode-toggle";
@@ -22,6 +23,8 @@ const children = (
     {/* Main */}
     <Route path="/explore" element={<Explore />} />
     <Route path="/study-room/:id" element={<Explore />} />
+    {/* Add Room */}
+    <Route path="/new-room" element={<NewRoom />} />
     {/* 404 */}
     <Route
       path="*"
@@ -67,6 +70,14 @@ function Explore() {
   );
 }
 
+function NewRoom() {
+  return (
+    <div className="w-full h-screen">
+      <AddRoom />
+    </div>
+  );
+}
+
 function Home() {
   return (
     <>
@@ -100,6 +111,9 @@ function App() {
             <Button variant="link" onClick={() => navigate("/explore")}>
               Explore
             </Button>
+            <Button variant="link" onClick={() => navigate("/new-room")}>
+              Add
+            </Button>
             <ModeToggle />
           </ul>
         </nav>
@@ -123,6 +137,11 @@ function App() {
               <DropdownMenuItem>
                 <Button variant="link" onClick={() => navigate("/explore")}>
                   Explore
+                </Button>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Button variant="link" onClick={() => navigate("/new-room")}>
+                  Add
                 </Button>
               </DropdownMenuItem>
             </DropdownMenuContent>
