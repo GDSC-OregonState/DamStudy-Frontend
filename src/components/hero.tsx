@@ -40,7 +40,7 @@ const Hero = () => {
             </Button>
           </div>
         </div>
-        <div className="lg:w-1/2 lg:mt-20">
+        <div className=" lg:w-1/2 lg:mt-20">
           <AspectRatio ratio={16 / 9}>
             <img
               src="/preview.png"
