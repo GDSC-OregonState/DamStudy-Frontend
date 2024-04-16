@@ -3,7 +3,7 @@ export function AboutPage() {
     <>
       <section className="container prose prose-neutral dark:prose-invert max-w-2xl place-self-start my-24">
         <h1 className="font-medium text-2xl mb-8 tracking-tighter">
-          about damstutdy
+          about damstudy
         </h1>
         <div className="prose prose-neutral dark:prose-invert">
           <p>
