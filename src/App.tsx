@@ -149,10 +149,12 @@ function App() {
           <ModeToggle />
         </nav>
       </header>
-      <div className="flex items-center justify-center min-h-[90dvh]">
-        {children}
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow">{children}</main>
       </div>
-      <footer id="footer" className="mt-12 p-4 text-center text-sm">
+      {/*
+      TODO: Figure out why the hell this isn't remaining at the bottom of the page
+      <footer id="footer" className="p-4 text-center relative bottom-0">
         <p>
           DamStudy is being developed by the{" "}
           <a
@@ -163,7 +165,7 @@ function App() {
           </a>{" "}
           at Oregon State University
         </p>
-      </footer>
+      </footer> */}
     </>
   );
 }

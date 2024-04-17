@@ -3,14 +3,7 @@ import { useEffect, useState } from "react";
 import { APIProvider, Map } from "@vis.gl/react-google-maps";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import { DeckGlOverlay } from "./deckgl-overlay";
 
@@ -18,12 +11,11 @@ import { DeckGlOverlay } from "./deckgl-overlay";
 const DATA_URL =
   "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/bart.geo.json";
 
-import { cn } from "@/lib/utils";
 import type { Feature, GeoJSON } from "geojson";
 import { useNavigate } from "react-router-dom";
+import RoomCard from "./room-card";
 import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
-import { Separator } from "./ui/separator";
 
 const API_KEY = globalThis.process.env.GOOGLE_MAPS_API_KEY ?? "";
 
@@ -162,49 +154,7 @@ export function ExplorePage({ className, ...props }: CardProps) {
             </div>
             <ScrollArea className="col-span-2 h-96">
               {studyRooms.map((room) => (
-                <Card className={cn("w-full", className)} {...props}>
-                  <CardHeader>
-                    <CardTitle>{room.name}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <img
-                      src={room.image}
-                      alt={room.name}
-                      className="object-cover min-w-full h-full rounded-sm"
-                    />
-                    <CardDescription
-                      className={cn("grid grid-cols-2 gap-2 mt-2 w-full")}
-                    >
-                      <p className="w-full whitespace-nowrap text-center">
-                        Located at {room.location}
-                      </p>
-                      <br />
-                      <p className="col-span-1">• {room.seats} seats</p>
-                      <p className="col-span-1">
-                        • {room.noiseLevel} noise level
-                      </p>
-                      <ul className="col-span-1">
-                        <p>Technology:</p>
-                        {room.technology.map((tech) => (
-                          <li key={tech} className="mr-2">
-                            • {tech}
-                          </li>
-                        ))}
-                      </ul>
-                      <p className="col-span-1">• {room.seating} seating</p>
-                    </CardDescription>
-                  </CardContent>
-                  <Separator />
-                  <CardFooter className={cn("mt-2")}>
-                    <Button
-                      variant="link"
-                      onClick={() => navigate(`/study-room/${room.id}`)}
-                    >
-                      View
-                    </Button>
-                    <Button variant="link">Update Details</Button>
-                  </CardFooter>
-                </Card>
+                <RoomCard key={room.id} room={room} />
               ))}
             </ScrollArea>
           </div>
