@@ -6,13 +6,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { LoadScript } from "@react-google-maps/api";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { AboutPage } from "./components/about";
 import AddRoom from "./components/add-room";
 import { ExplorePage } from "./components/explore";
 import Hero from "./components/hero";
+import LoaderFallback from "./components/loader-fallback";
 import { ModeToggle } from "./components/mode-toggle";
 import { Button } from "./components/ui/button";
+import { GOOGLE_MAPS_API_KEY } from "./lib/constants";
 
 const children = (
   <Routes>
@@ -22,6 +25,7 @@ const children = (
     <Route path="/about" element={<About />} />
     {/* Main */}
     <Route path="/explore" element={<Explore />} />
+    {/* Single Study Room */}
     <Route path="/study-room/:id" element={<Explore />} />
     {/* Add Room */}
     <Route path="/new-room" element={<NewRoom />} />
@@ -73,7 +77,15 @@ function Explore() {
 function NewRoom() {
   return (
     <div className="w-full h-screen">
-      <AddRoom />
+      {window.google && <AddRoom />}
+      {!window.google && (
+        <LoadScript
+          googleMapsApiKey={GOOGLE_MAPS_API_KEY}
+          loadingElement={<LoaderFallback />}
+        >
+          <AddRoom />
+        </LoadScript>
+      )}
     </div>
   );
 }
