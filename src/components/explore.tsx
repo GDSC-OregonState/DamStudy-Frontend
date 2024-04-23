@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import {
   AdvancedMarker,
   APIProvider,
@@ -30,6 +29,7 @@ import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
 
+
 export function ExplorePage({ className, ...props }: CardProps) {
   const [data, setData] = useState<GeoJSON | null>(null);
   const [room, setRoom] = useState<StudyRoom | null>(null);
@@ -49,6 +49,8 @@ export function ExplorePage({ className, ...props }: CardProps) {
       .then((data) => setData(data as GeoJSON));
   }, []);
 
+  const [room, setRoom] = useState<StudyRoom | null>(null);
+
   const handleMarkerClick = (room: StudyRoom) => {
     setRoom(room);
   };
@@ -56,7 +58,6 @@ export function ExplorePage({ className, ...props }: CardProps) {
   const handleCloseClick = () => {
     setRoom(null);
   };
-
   return (
     rooms && (
       <APIProvider apiKey={GOOGLE_MAPS_API_KEY}>
