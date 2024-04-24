@@ -35,7 +35,7 @@ To get a local copy up and running follow these simple steps.
    ```sh
     npm install
    ```
-3. Create a `.env.local` file in the root directory and add the following environment variables
+3. Create a `.env.local` file in the root directory and add the following environment variable
    ```sh
     GOOGLE_MAPS_API_KEY=
    ```
