@@ -8,7 +8,7 @@ const Hero = () => {
   const navigate = useNavigate();
   return (
     <section id="hero">
-      <div className="container flex flex-col lg:flex-row mx-auto lg:overflow-x-clip">
+      <div className="container flex flex-col lg:flex-row mx-auto lg:overflow-x-clip my-14">
         <div className="space-y-6 lg:w-1/2 my-12">
           <a
             href="https://discord.gg/pvfa69B4gb"
